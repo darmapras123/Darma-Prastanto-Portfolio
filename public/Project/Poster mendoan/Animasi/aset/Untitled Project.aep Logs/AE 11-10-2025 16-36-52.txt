@@ -1,0 +1,17 @@
+Adobe After Effects v23.6 Windows 64 render log for project “Untitled Project.aep”
+
+Rendering started on 11/10/2025 at 16:36:52
+
+  11/10/2025 16:36:52: Starting composition “animasi gorengan”.
+
+  Output To: C:\Users\Lenovo Ideapad Slim3\Pictures\gorengan\animasi gorengan_1.mp4    11/10/2025 16:37:34: Finished composition “animasi gorengan”.
+
+
+  11/10/2025 16:37:34: Starting composition “animasi gorengan”.
+
+  Output To: C:\Users\Lenovo Ideapad Slim3\Pictures\gorengan\animasi gorengan_12.mp4    11/10/2025 16:37:47: Finished composition “animasi gorengan”.
+
+
+  Total Time Elapsed: 55 Seconds
+Log closed on 11/10/2025 at 16:37:48
+
