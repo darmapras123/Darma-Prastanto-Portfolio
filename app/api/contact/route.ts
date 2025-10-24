@@ -9,7 +9,10 @@ export async function POST(req: Request) {
     const { name, email, message } = await req.json();
 
     if (!message || typeof message !== "string") {
-      return NextResponse.json({ ok: false, error: "Message is required" }, { status: 400 });
+      return NextResponse.json(
+        { ok: false, error: "Message is required" },
+        { status: 400 }
+      );
     }
 
     const subject = `New message from portfolio${name ? ` — ${name}` : ""}`;
@@ -26,7 +29,10 @@ export async function POST(req: Request) {
 
     // Dukung multi-email dipisah koma (kalau hanya satu, tetap string)
     const to = toEnv.includes(",")
-      ? toEnv.split(",").map((s) => s.trim()).filter(Boolean)
+      ? toEnv
+          .split(",")
+          .map((s) => s.trim())
+          .filter(Boolean)
       : toEnv;
 
     const from = fromEnv;
@@ -37,18 +43,11 @@ export async function POST(req: Request) {
         ${name ? `<p><b>Name:</b> ${escapeHtml(name)}</p>` : ""}
         ${email ? `<p><b>Email:</b> ${escapeHtml(email)}</p>` : ""}
         <p><b>Message:</b></p>
-        <pre style="white-space:pre-wrap;background:#f6f6f6;padding:12px;border-radius:8px">${escapeHtml(message)}</pre>
+        <pre style="white-space:pre-wrap;background:#f6f6f6;padding:12px;border-radius:8px">${escapeHtml(
+          message
+        )}</pre>
       </div>
     `;
-
-    // 🔎 DEBUG ENV (hapus setelah beres)
-    const masked = (process.env.RESEND_API_KEY || "").replace(/^(.{6}).+$/, "$1********");
-    console.log("ENV CHECK:", {
-      hasApiKey: !!process.env.RESEND_API_KEY,
-      apiKeyStartsWith: masked,
-      toEnv: toEnv,
-      fromEnv: fromEnv,
-    });
 
     const { error } = await resend.emails.send({
       to,
@@ -59,18 +58,29 @@ export async function POST(req: Request) {
     });
 
     if (error) {
+      // tetap biarkan error logging agar mudah debugging di server
       console.error("Resend error:", error);
-      return NextResponse.json({ ok: false, error: "Failed to send email" }, { status: 500 });
+      return NextResponse.json(
+        { ok: false, error: "Failed to send email" },
+        { status: 500 }
+      );
     }
 
     return NextResponse.json({ ok: true });
   } catch (err: any) {
+    // tetap biarkan error logging agar mudah debugging di server
     console.error("API /contact error:", err);
-    return NextResponse.json({ ok: false, error: err?.message || "Invalid request" }, { status: 400 });
+    return NextResponse.json(
+      { ok: false, error: err?.message || "Invalid request" },
+      { status: 400 }
+    );
   }
 }
 
 // ——— helper sederhana anti XSS
 function escapeHtml(input: string) {
-  return input.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  return input
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
 }
