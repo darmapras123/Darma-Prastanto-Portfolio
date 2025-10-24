@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, useAnimation, useInView } from "framer-motion";
-import Sosmed from "../../home/Contact/SosmedBox";
 import StarBorder from "../../components/Effects/StarBorder";
 
 type ContactFormProps = {
@@ -18,13 +17,17 @@ const Field =
   "placeholder-black/50 dark:placeholder-white/60 text-black dark:text-white";
 
 const variants = {
-  hidden: { x: "22vw", opacity: 0 },      // start off-screen kanan
+  hidden: { x: "22vw", opacity: 0 }, // start off-screen kanan
   center: {
     x: 0,
     opacity: 1,
     transition: { type: "spring", stiffness: 120, damping: 18, mass: 0.8 },
   },
-  exitRight: { x: "26vw", opacity: 0, transition: { duration: 0.45, ease: "easeOut" } },
+  exitRight: {
+    x: "26vw",
+    opacity: 0,
+    transition: { duration: 0.45, ease: "easeOut" },
+  },
 };
 
 function ContactForm({
@@ -76,14 +79,11 @@ function ContactForm({
 
   useEffect(() => {
     if (inView) {
-      // Saat elemen terlihat → animasi ke posisi center
       controls.start("center");
     } else {
       if (scrollUp) {
-        // scroll ke atas → geser ke kanan & hilang
         controls.start("exitRight");
       } else {
-        // scroll ke bawah (melewati section) → reset ke hidden kanan
         controls.start("hidden");
       }
     }
@@ -97,9 +97,9 @@ function ContactForm({
       animate={controls}
       onSubmit={onSubmit}
       className={[
-        "w-full max-w-[94vw] h-auto",               // mobile
+        "w-full max-w-[94vw] h-auto", // mobile
         "md:w-[13cm] lg:w-[15cm] md:max-w-[450px]", // desktop lebar form
-        "md:ml-[11cm]",                              // posisi sesuai setelanmu
+        "md:ml-[11cm]", // posisi sesuai setelanmu
         dockClass,
         className,
       ]
@@ -178,20 +178,10 @@ function ContactForm({
   );
 }
 
-export default function ContactSection() {
-  return (
-    <section id="contact" className="w-full">
-      {/* Grid dua kolom: kiri Sosmed (masuk dari kiri), kanan ContactForm (masuk dari kanan) */}
-      <div
-        className="
-          grid gap-6
-          grid-cols-1
-          md:auto-cols-max md:grid-flow-col
-        "
-      >
-        <Sosmed align="left" />
-        <ContactForm align="left" />
-      </div>
-    </section>
-  );
-}
+export default ContactForm;
+
+/** 
+ * Catatan:
+ * - Komponen ini tetap aktif & siap dipakai lagi nanti.
+ * - Tidak di-import di ContactSection (lihat file ContactSection.tsx).
+ */

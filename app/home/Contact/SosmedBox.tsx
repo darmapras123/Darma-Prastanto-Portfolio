@@ -29,7 +29,7 @@ type SosmedProps = {
 
 /* ==== Transitions dengan tipe kuat ==== */
 const springTrans: Transition = {
-  type: "spring", // <- literal dikenali karena tipe Transition
+  type: "spring",
   stiffness: 120,
   damping: 18,
   mass: 0.8,
@@ -37,12 +37,12 @@ const springTrans: Transition = {
 
 const exitTrans: Transition = {
   duration: 0.45,
-  ease: "easeOut", // <- literal valid
+  ease: "easeOut",
 };
 
 /* ==== Variants bertipe Variants ==== */
 const variants: Variants = {
-  hidden: { x: "-22vw", opacity: 0 }, // start off-screen kiri
+  hidden: { x: "-22vw", opacity: 0 },
   center: {
     x: 0,
     opacity: 1,
@@ -103,15 +103,11 @@ export default function Sosmed({
 
   useEffect(() => {
     if (inView) {
-      // Saat elemen terlihat → animasi ke posisi center
       controls.start("center");
     } else {
-      // Saat elemen keluar viewport:
       if (scrollUp) {
-        // scroll ke atas → geser ke kiri & hilang
         controls.start("exitLeft");
       } else {
-        // scroll ke bawah (melewati section) → reset ke hidden kiri
         controls.start("hidden");
       }
     }

@@ -1,9 +1,8 @@
 // app/home/Contact/ContactSection.tsx
 "use client";
 
-import type { ComponentType } from "react";
 import Image from "next/image";
-import ContactForm from "./ContactForm";
+import Sosmed from "./SosmedBox";
 
 type ContactSectionProps = {
   isLightMode: boolean;
@@ -14,15 +13,12 @@ export default function ContactSection({
   isLightMode,
   darkBg = "#151515ff",
 }: ContactSectionProps) {
-  const ContactFormCompat =
-    ContactForm as unknown as ComponentType<{ isLightMode?: boolean }>;
-
   return (
     <section
       id="contact"
       className={[
-        // Mobile-only dipendekkan (seperti versi terakhirmu)
         "relative flex items-center justify-center px-6 overflow-x-hidden",
+        // ruang untuk heading+paragraf + Sosmed + porto.png + footer
         "min-h-[108vh] sm:min-h-[130vh] lg:min-h-[145vh] xl:min-h-[160vh]",
         "pb-[14rem] sm:pb-[22rem] lg:pb-[26rem] xl:pb-[30rem]",
         isLightMode
@@ -30,8 +26,8 @@ export default function ContactSection({
           : "contact-dark text-white",
       ].join(" ")}
     >
-      {/* Konten utama (judul + form) */}
-      <div className="max-w-3xl text-center">
+      {/* ===== Konten utama: Heading + Paragraf (tanpa ContactForm) ===== */}
+      <div className="max-w-3xl text-center z-[3]">
         <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight tracking-tight">
           <span className="font-extrabold text-transparent bg-clip-text bg-[linear-gradient(90deg,#19D7FF_0%,#24D8C0_50%,#2BD985_100%)]">
             GET IN
@@ -39,23 +35,26 @@ export default function ContactSection({
           TOUCH
         </h2>
 
-        <p className="mb-6">
-          Jika ingin terhubung dengan saya, silakan kirim pesan melalui form di
-          bawah.
+        <p className="mb-8 sm:mb-10 opacity-90">
+          Jika ingin terhubung dengan saya, silakan gunakan tautan sosial di bawah
+          ini. Atau  bekerja sama jangan ragu untuk menghubungi saya melalui informasi kontak di bawah ini.
         </p>
 
-        <ContactFormCompat isLightMode={isLightMode} />
+        {/* ===== Hanya SosmedBox (ContactForm TIDAK dirender) ===== */}
+        <div className="w-full grid place-items-center">
+          <Sosmed align="center" />
+        </div>
       </div>
 
-      {/* === PNG PORTO ===
-          Mobile: diturunkan lagi -> top-[90%]
+      {/* ===== PNG PORTO (tetap tampil) =====
+          Mobile: diturunkan -> top-[90%]
           ≥ sm: kembali seperti semula -> sm:top-[75%]
       */}
       <figure
         className="
           pointer-events-none select-none
-          absolute left-[45%] top-[90%] sm:top-[75%] -translate-x-1/2 -translate-y-1/2
-          z-[1] md:z-[2]
+          absolute left-1/2 top-[90%] sm:top-[75%] -translate-x-1/2 -translate-y-1/2
+          z-[1]
         "
         aria-hidden
       >
@@ -75,7 +74,7 @@ export default function ContactSection({
         />
       </figure>
 
-      {/* Footer — mobile dibuat lebih ke bawah (bottom-0), ≥ sm tetap seperti sebelumnya */}
+      {/* ===== Footer / Watermark (tetap tampil) ===== */}
       <footer
         className={[
           "absolute inset-x-0 bottom-0 sm:bottom-10 text-center text-xs sm:text-sm select-none",
