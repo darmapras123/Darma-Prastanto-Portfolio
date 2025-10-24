@@ -6,8 +6,8 @@ import Image from "next/image";
 import ModalBottomSheet from "../../../components/ModalBottomSheet";
 
 // Pastikan path sesuai struktur kamu
-import BATIK from "@/public/Project/logo Brand/Batik.png";
-import MODAL_BATIK from "@/public/Project/logo Brand/Modal_batik.png";
+import BATIK from "@/public/Project/LogoBrand/Batik.png";
+import MODAL_BATIK from "@/public/Project/LogoBrand/Modal_batik.png";
 
 type Props = { onViewerOpenChange?: (open: boolean) => void };
 
