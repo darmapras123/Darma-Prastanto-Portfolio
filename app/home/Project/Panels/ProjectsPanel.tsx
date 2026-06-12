@@ -1,3 +1,4 @@
+// app/home/Project/Panels/ProjectsPanel.tsx
 "use client";
 
 import React from "react";
@@ -6,6 +7,7 @@ import Batik from "../ProjectItems/Batik";
 import Poster17 from "../ProjectItems/Poster17";
 import PosterMendoan from "../ProjectItems/PosterMendoan";
 import TampilanAnimasi from "../ProjectItems/TampilanAnimasi";
+import ProjectKlikBapas from "../ProjectItems/ProjectKlikBapas"; // ✅ Perbaikan path impor agar sesuai struktur folder
 
 type Props = {
   isLightMode: boolean;
@@ -25,6 +27,8 @@ export default function ProjectsPanel({ isLightMode, onViewerOpenChange }: Props
           <Poster17 onViewerOpenChange={onViewerOpenChange} />
           <PosterMendoan onViewerOpenChange={onViewerOpenChange} />
           <TampilanAnimasi onViewerOpenChange={onViewerOpenChange} />
+          {/* ✅ Ditambahkan di paling bawah untuk tampilan mobile */}
+          <ProjectKlikBapas isLightMode={isLightMode} onViewerOpenChange={onViewerOpenChange} />
         </div>
 
         {/* DESKTOP (≥ sm): 3 kolom sejajar, center, gap 0.5cm */}
@@ -48,9 +52,11 @@ export default function ProjectsPanel({ isLightMode, onViewerOpenChange }: Props
             <TampilanAnimasi onViewerOpenChange={onViewerOpenChange} />
           </div>
 
-          {/* Kolom 3: Poster 17 Agustus */}
+          {/* Kolom 3: Poster 17 Agustus + Website Klik Bapas */}
           <div className="flex flex-col items-start gap-y-[0.5cm]">
             <Poster17 onViewerOpenChange={onViewerOpenChange} />
+            {/* ✅ Ditambahkan di bawah Poster17 pada Kolom 3 agar grid tetap seimbang */}
+            <ProjectKlikBapas isLightMode={isLightMode} onViewerOpenChange={onViewerOpenChange} />
           </div>
         </div>
       </div>

@@ -1,17 +1,8 @@
-// app/home/Contact/SosmedBox.tsx
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
-import {
-  motion,
-  useAnimation,
-  useInView,
-  type Variants,
-  type Transition,
-} from "framer-motion";
-import StarBorder from "../../components/Effects/StarBorder";
 import { CornerUpRight } from "lucide-react";
+import StarBorder from "../../components/Effects/StarBorder";
 
 type SosmedProps = {
   className?: string;
@@ -27,34 +18,6 @@ type SosmedProps = {
   heading?: string;
 };
 
-/* ==== Transitions dengan tipe kuat ==== */
-const springTrans: Transition = {
-  type: "spring",
-  stiffness: 120,
-  damping: 18,
-  mass: 0.8,
-};
-
-const exitTrans: Transition = {
-  duration: 0.45,
-  ease: "easeOut",
-};
-
-/* ==== Variants bertipe Variants ==== */
-const variants: Variants = {
-  hidden: { x: "-22vw", opacity: 0 },
-  center: {
-    x: 0,
-    opacity: 1,
-    transition: springTrans,
-  },
-  exitLeft: {
-    x: "-26vw",
-    opacity: 0,
-    transition: exitTrans,
-  },
-};
-
 export default function Sosmed({
   className,
   align = "left",
@@ -68,6 +31,7 @@ export default function Sosmed({
 
   heading = "Terhubung Dengan Saya",
 }: SosmedProps) {
+  
   const dockClass =
     align === "left"
       ? "justify-self-start self-start place-self-start"
@@ -76,52 +40,21 @@ export default function Sosmed({
   const CARD_BASE =
     "group rounded-xl block overflow-hidden px-4 sm:px-5 py-3 sm:py-4 min-h-[72px] " +
     "transition-transform duration-300 ease-out transform-gpu will-change-transform";
+    
   const CARD_HOVER =
     "hover:scale-[1.05] hover:-translate-y-1 " +
     "hover:shadow-[0_24px_80px_-20px_rgba(0,0,0,0.55)] " +
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 " +
     "focus-visible:scale-[1.035]";
 
-  // === Animasi in-view + arah scroll ===
-  const ref = useRef<HTMLDivElement | null>(null);
-  const inView = useInView(ref, { amount: 0.35 });
-  const controls = useAnimation();
-
-  const [lastY, setLastY] = useState(0);
-  const [scrollUp, setScrollUp] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => {
-      const y = window.scrollY || 0;
-      setScrollUp(y < lastY);
-      setLastY(y);
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [lastY]);
-
-  useEffect(() => {
-    if (inView) {
-      controls.start("center");
-    } else {
-      if (scrollUp) {
-        controls.start("exitLeft");
-      } else {
-        controls.start("hidden");
-      }
-    }
-  }, [inView, scrollUp, controls]);
-
   return (
-    <motion.div
-      ref={ref}
-      variants={variants}
-      initial="hidden"
-      animate={controls}
+    /* - Mengubah dari motion.div menjadi div biasa (Menghapus seluruh logika sensor scroll & koordinat x)
+      - Menghapus margin negatif desktop lama (md:ml-[-4cm] md:mr-[5cm]) agar pas berada di sisi kiri form tanpa melenceng keluar layar
+    */
+    <div
       className={[
         "w-full max-w-[92vw] shrink-0", // mobile
-        "md:w-[12cm] md:max-w-none md:ml-[-4cm] md:mr-[5cm]", // desktop posisimu
+        "md:w-[12cm] md:max-w-none",     // ukuran kotak di desktop tetap 12cm
         dockClass,
         className,
       ]
@@ -181,7 +114,7 @@ export default function Sosmed({
               </div>
             </a>
 
-            {/* ===== Gmail (tanpa kuning) ===== */}
+            {/* ===== Gmail ===== */}
             <a
               href={gmailTo}
               className={[
@@ -267,6 +200,6 @@ export default function Sosmed({
           </div>
         </div>
       </StarBorder>
-    </motion.div>
+    </div>
   );
 }

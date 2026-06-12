@@ -70,7 +70,8 @@ function Aurora() {
 
 /* ================= Typewriter ================= */
 function TypewriterText({ start, isLightMode }: { start: boolean; isLightMode: boolean }) {
-  const words = ["Design Graphic", "Animation"];
+  // ✅ PERBAIKAN: Mengganti list kata sesuai dengan keinginan Anda dan menghapus Animation
+  const words = ["AI-Assisted Developer", "UI/UX Designer", "Graphic Designer"];
   const [text, setText] = useState("");
   const [wordIndex, setWordIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
@@ -204,13 +205,13 @@ export default function HomePage() {
     }
   }, []);
 
-  // Active section observer
+// Active section observer
   useEffect(() => {
     const sections = document.querySelectorAll(
       "#lanyard-section, #about, #project, #contact"
     );
     const observer = new IntersectionObserver(
-      (entries) => {
+      (entries) => { // benerin bagian ini jadi huruf kecil 'entries'
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setActiveSection(entry.target.id);
@@ -253,7 +254,7 @@ export default function HomePage() {
         className={[
           isLightMode ? "bg-white text-black" : "bg-[#151515] text-white",
           "scroll-container relative w-screen h-screen overflow-y-scroll scroll-smooth transition-colors duration-1000",
-          introBlur ? "intro-blur" : ""
+          introBlur ? "intro-blur" : "",
         ].join(" ")}
       >
         {/* Stars */}
@@ -294,7 +295,9 @@ export default function HomePage() {
             initial={{ x: -200, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
             transition={{ type: "spring", stiffness: 110, damping: 24, mass: 0.9, delay: 0.3 }}
-            onAnimationComplete={() => { setTimeout(() => setStartTypewriter(true), 500); }}
+            onAnimationComplete={() => {
+              setTimeout(() => setStartTypewriter(true), 500);
+            }}
             className={`mt-2 text-6xl font-bold ${isLightMode ? "text-black" : "text-white"} hero-name`}
           >
             Darma Prastanto
@@ -342,8 +345,16 @@ export default function HomePage() {
           <div
             id="lanyard-section"
             className="col-span-50 relative px-4 sm:px-0 min-h-screen flex items-center justify-center lanyard-mobile ml-[40vw] -mt-[10px] [pointer-events:auto] [touch-action:none] [user-select:none] [webkit-user-select:none] z-[6]"
-            onTouchStart={(e) => { try { e.preventDefault(); } catch {} }}
-            onTouchMove={(e) => { try { e.preventDefault(); } catch {} }}
+            onTouchStart={e => {
+              try {
+                e.preventDefault();
+              } catch {}
+            }}
+            onTouchMove={e => {
+              try {
+                e.preventDefault();
+              } catch {}
+            }}
           >
             {webglOK ? (
               <LanyardDynamic position={[posX, 0, zPos]} gravity={[0, -40, 0]} />
@@ -375,7 +386,9 @@ export default function HomePage() {
           .scroll-container {
             transition: filter 1s ease, background-color 1s ease, color 1s ease;
           }
-          .intro-blur { filter: blur(12px); }
+          .intro-blur {
+            filter: blur(12px);
+          }
 
           [data-theme="light"] #lanyard-section,
           [data-theme="light"] #about,
@@ -386,13 +399,28 @@ export default function HomePage() {
           }
           [data-theme="light"] #about > *,
           [data-theme="light"] #project > *,
-          [data-theme="light"] #contact > * { background: transparent !important; }
-          [data-theme="light"] #lanyard-section { background: transparent !important; background-color: transparent !important; }
+          [data-theme="light"] #contact > * {
+            background: transparent !important;
+          }
+          [data-theme="light"] #lanyard-section {
+            background: transparent !important;
+            background-color: transparent !important;
+          }
 
-          .hero-text { z-index: 5 !important; pointer-events: auto !important; }
-          .hero-name, .hero-h2 { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+          .hero-text {
+            z-index: 5 !important;
+            pointer-events: auto !important;
+          }
+          .hero-name,
+          .hero-h2 {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+          }
 
-          .typewriter-line { font-weight: 700; }
+          .typewriter-line {
+            font-weight: 700;
+          }
           [data-theme="dark"] .typewriter-line {
             background: linear-gradient(90deg, #22d3ee 0%, #60a5fa 45%, #a78bfa 100%);
             -webkit-background-clip: text;
@@ -423,7 +451,9 @@ export default function HomePage() {
             user-select: none !important;
           }
 
-          .mobile-hero-spacer { height: 0; }
+          .mobile-hero-spacer {
+            height: 0;
+          }
 
           :root {
             --lanyard-mobile-top: -1%;
@@ -431,7 +461,7 @@ export default function HomePage() {
             --lanyard-mobile-left: 10px;
             --lanyard-mobile-bottom: auto;
 
-            --lanyard-scale-mobile: 0.70;
+            --lanyard-scale-mobile: 0.7;
 
             --mobile-header-height: 100px;
             --mobile-header-sidepad: 10px;
@@ -458,23 +488,49 @@ export default function HomePage() {
               width: calc(100vw - 20px) !important;
               z-index: 50 !important;
             }
-            .header-shell { padding-left: var(--mobile-header-sidepad) !important; padding-right: var(--mobile-header-sidepad) !important; border-radius: 9999px !important; box-shadow: 0 8px 22px rgba(0,0,0,0.28) !important; }
-            .responsive-header nav { display: flex !important; position: static !important; width: 100% !important; padding: 0 !important; flex-direction: row !important; gap: var(--mobile-header-gap) !important; }
+            .header-shell {
+              padding-left: var(--mobile-header-sidepad) !important;
+              padding-right: var(--mobile-header-sidepad) !important;
+              border-radius: 9999px !important;
+              box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28) !important;
+            }
+            .responsive-header nav {
+              display: flex !important;
+              position: static !important;
+              width: 100% !important;
+              padding: 0 !important;
+              flex-direction: row !important;
+              gap: var(--mobile-header-gap) !important;
+            }
 
-            .tooltip-chip { position: absolute !important; bottom: calc(100% + var(--mobile-tooltip-gap)) !important; left: 50% !important; transform: translateX(-50%) !important; font-size: var(--mobile-font-size) !important; padding: 2px 6px !important; z-index: 100 !important; }
+            .tooltip-chip {
+              position: absolute !important;
+              bottom: calc(100% + var(--mobile-tooltip-gap)) !important;
+              left: 50% !important;
+              transform: translateX(-50%) !important;
+              font-size: var(--mobile-font-size) !important;
+              padding: 2px 6px !important;
+              z-index: 100 !important;
+            }
 
-            .divider-line { height: 18px !important; opacity: 0.7 !important; }
+            .divider-line {
+              height: 18px !important;
+              opacity: 0.7 !important;
+            }
 
             /* ⬇️ DIPINDAH LEBIH KE ATAS DI MOBILE */
             .hero-text {
               left: 16px !important;
               right: 16px !important;
-              top: 10% !important;           /* ⬅️ moved up on mobile */
+              top: 10% !important; /* ⬅️ moved up on mobile */
               transform: none !important;
               z-index: 5 !important;
             }
 
-            .hero-h2 { font-size: 28px !important; line-height: 1.22 !important; }
+            .hero-h2 {
+              font-size: 28px !important;
+              line-height: 1.22 !important;
+            }
             .hero-name {
               margin-top: 8px !important;
               font-size: var(--hero-name-font-mobile) !important;
@@ -482,12 +538,30 @@ export default function HomePage() {
               letter-spacing: var(--hero-name-letter-mobile) !important;
               line-height: var(--hero-name-line-mobile) !important;
             }
-            .typewriter-line { font-size: 24px !important; margin-top: 12px !important; }
+            .typewriter-line {
+              font-size: 24px !important;
+              margin-top: 12px !important;
+            }
 
-            .cv-button { margin-top: 12px !important; padding: 10px 16px !important; font-size: 14px !important; border-radius: 10px !important; }
+            .cv-button {
+              margin-top: 12px !important;
+              padding: 10px 16px !important;
+              font-size: 14px !important;
+              border-radius: 10px !important;
+            }
 
-            #lanyard-section { margin-left: 0 !important; margin-top: 8px !important; min-height: 60vh !important; padding-left: 0 !important; padding-right: 0 !important; }
-            #lanyard-section > * { transform: scale(var(--lanyard-scale-mobile)) !important; transform-origin: top center !important; will-change: transform; }
+            #lanyard-section {
+              margin-left: 0 !important;
+              margin-top: 8px !important;
+              min-height: 60vh !important;
+              padding-left: 0 !important;
+              padding-right: 0 !important;
+            }
+            #lanyard-section > * {
+              transform: scale(var(--lanyard-scale-mobile)) !important;
+              transform-origin: top center !important;
+              will-change: transform;
+            }
             .lanyard-mobile {
               position: absolute !important;
               right: var(--lanyard-mobile-right) !important;
@@ -503,43 +577,93 @@ export default function HomePage() {
               pointer-events: auto !important;
               touch-action: none !important;
             }
-            .lanyard-mobile canvas { pointer-events: auto !important; touch-action: none !important; }
+            .lanyard-mobile canvas {
+              pointer-events: auto !important;
+              touch-action: none !important;
+            }
 
-            .mobile-hero-spacer { height: 68vh !important; }
+            .mobile-hero-spacer {
+              height: 68vh !important;
+            }
 
             .scroll-container {
               padding-bottom: calc(
-                var(--mobile-header-height) + var(--mobile-bottom-gap) + env(safe-area-inset-bottom) + 20px
+                var(--mobile-header-height) + var(--mobile-bottom-gap) +
+                  env(safe-area-inset-bottom) + 20px
               ) !important;
             }
           }
 
           @media (max-width: 380px) {
-            :root { --hero-name-font-mobile: 40px; }
-            #lanyard-section > * { transform: scale(calc(var(--lanyard-scale-mobile) - 0.04)) !important; }
-            .mobile-hero-spacer { height: 72vh !important; }
+            :root {
+              --hero-name-font-mobile: 40px;
+            }
+            #lanyard-section > * {
+              transform: scale(calc(var(--lanyard-scale-mobile) - 0.04)) !important;
+            }
+            .mobile-hero-spacer {
+              height: 72vh !important;
+            }
           }
 
           @media (min-width: 641px) and (max-width: 768px) {
-            .responsive-header { top: 700px !important; height: 55px !important; }
-            .hero-h2 { font-size: 24px !important; }
-            .hero-name { font-size: 40px !important; }
-            .typewriter-line { font-size: 20px !important; }
+            .responsive-header {
+              top: 700px !important;
+              height: 55px !important;
+            }
+            .hero-h2 {
+              font-size: 24px !important;
+            }
+            .hero-name {
+              font-size: 40px !important;
+            }
+            .typewriter-line {
+              font-size: 20px !important;
+            }
           }
 
-          :root { --lanyard-scale-desktop: 1.50; }
+          :root {
+            --lanyard-scale-desktop: 1.5;
+          }
 
           @media (min-width: 1024px) {
-            .responsive-header { height: 55px !important; bottom: auto !important; }
+            .responsive-header {
+              height: 55px !important;
+              bottom: auto !important;
+            }
           }
 
           /* Compact header overrides */
-          .appheader-compact > div { height: 48px !important; padding-left: 8px !important; padding-right: 8px !important; border-radius: 9999px !important; }
-          .appheader-compact button { height: 40px !important; padding-left: 10px !important; padding-right: 10px !important; border-radius: 9999px !important; }
-          .appheader-compact > div > div + div { width: 1px !important; height: 20px !important; }
-          .logo-compact > div { width: 48px !important; height: 48px !important; border-radius: 9999px !important; display: flex !important; align-items: center !important; justify-content: center !important; }
-          .compact-header-row { gap: 4px !important; }
-          .logo-compact { margin-right: -2px !important; }
+          .appheader-compact > div {
+            height: 48px !important;
+            padding-left: 8px !important;
+            padding-right: 8px !important;
+            border-radius: 9999px !important;
+          }
+          .appheader-compact button {
+            height: 40px !important;
+            padding-left: 10px !important;
+            padding-right: 10px !important;
+            border-radius: 9999px !important;
+          }
+          .appheader-compact > div > div + div {
+            width: 1px !important;
+            height: 20px !important;
+          }
+          .logo-compact > div {
+            width: 48px !important;
+            height: 48px !important;
+            border-radius: 9999px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+          }
+          .compact-header-row {
+            gap: 4px !important;
+          }
+          .logo-compact {
+            margin-right: -2px !important;
+          }
         `}</style>
       </main>
     </>

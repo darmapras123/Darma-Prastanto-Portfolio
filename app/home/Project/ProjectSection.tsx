@@ -8,10 +8,12 @@ import PanelContainer from "./Panels/PanelContainer";
 import ProjectsPanel from "./Panels/ProjectsPanel";
 import CertificateDOT from "./ProjectItems/CertificateDOT";
 import CertificateTOEFL from "./ProjectItems/CertificateTOEFL";
-import CertificatePesertaLombaDesain from "./ProjectItems/CertificatePesertaLombaDesain"; // ⬅️ import baru
-import TechStackPanel from "./Panels/TechStackPanel"; // ⬅️ TAMBAHAN: panel untuk tab Tech Stack
+import CertificatePesertaLombaDesain from "./ProjectItems/CertificatePesertaLombaDesain";
+import CertificateBapas from "./ProjectItems/CertificateBapas"; 
+import CertificateKemnaker from "./ProjectItems/CertificateKemnaker"; // ✅ Import sertifikat kemnaker baru
+import TechStackPanel from "./Panels/TechStackPanel";
 
-// ⬇️ TAMBAHAN: import ProjectBox (sesuai permintaan)
+// Import ProjectBox
 import ProjectBox from "../../components/LihatProject/LihatProject";
 
 type Props = {
@@ -39,11 +41,11 @@ export default function ProjectSection({
         isLightMode ? "bg-transparent text-black" : "bg-transparent text-white",
       ].join(" ")}
     >
-      {/* Desktop hero (PNG my-project) */}
+      {/* Desktop hero */}
       <div className="hidden md:block absolute left-[275px] top-[-95px] w-[980px]">
         <div className="relative w-full h-auto">
           <Image
-            src="/Project/my-project.png"           // ✅ gunakan path publik dari folder /public
+            src="/Project/my-project.png"
             alt="My Project Illustration"
             priority
             className="w-full h-auto select-none"
@@ -54,11 +56,11 @@ export default function ProjectSection({
         </div>
       </div>
 
-      {/* Mobile hero — diperbesar */}
+      {/* Mobile hero */}
       <div className="md:hidden flex justify-center">
         <div className="relative w-[96vw] max-w-[740px] scale-[1.40] origin-top">
           <Image
-            src="/Project/my-project.png"           // ✅ path publik yang sama
+            src="/Project/my-project.png"
             alt="My Project Illustration"
             priority
             className="w-full h-auto select-none"
@@ -69,7 +71,7 @@ export default function ProjectSection({
         </div>
       </div>
 
-      {/* ⬇️ CTA ProjectBox — DISembunyikan tanpa menghapus kode */}
+      {/* CTA ProjectBox (Hidden) */}
       <div className="mt-4 flex justify-center hidden">
         <ProjectBox isLightMode={isLightMode} href="/project" />
       </div>
@@ -92,23 +94,28 @@ export default function ProjectSection({
       {/* PanelContainer */}
       <div className="mt-[1cm]">
         <PanelContainer
-          innerMaxWClass="max-w-[420px]"
-          contentPaddingClass="p-[0.5cm]"      // padding DI DALAM card
-          outerClassName="px-[1cm] sm:px-0"     // MOBILE-ONLY gutter 1cm kiri/kanan
+          innerMaxWClass={active === "certs" ? "max-w-[780px] md:max-w-4xl w-full" : "max-w-[420px]"}
+          contentPaddingClass="p-[0.5cm]"
+          outerClassName="px-[1cm] sm:px-0"
           outlined
-          shrinkDesktop                         // desktop: panel w-fit mengikuti konten
+          shrinkDesktop={active !== "certs"}
         >
           {active === "projects" ? (
             <ProjectsPanel isLightMode={isLightMode} />
           ) : active === "certs" ? (
-            // Mobile: 1 kolom; Desktop: 2 kolom (item ke-3 turun baris)
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-6 justify-items-center">
+            /* Urutan diletakkan berurutan dari atas ke bawah */
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-6 justify-items-center w-full h-auto clear-both">
+              {/* Baris Atas (Sertifikat Lama) */}
               <CertificateDOT />
               <CertificateTOEFL />
               <CertificatePesertaLombaDesain />
+              
+              {/* Baris Bawah (Sertifikat Baru Anda) */}
+              <CertificateBapas /> 
+              <CertificateKemnaker />
             </div>
           ) : (
-            // ==== PANEL TECH STACK (ikon Ae muncul di bawah Tabs) ====
+            // ==== PANEL TECH STACK ====
             <div className="flex items-center justify-center py-6">
               <TechStackPanel isLightMode={isLightMode} />
             </div>

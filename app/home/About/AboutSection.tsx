@@ -241,13 +241,15 @@ export default function AboutSection({
                   }`}
                 >
                   <p>
-                    <strong>Halo, saya Darma Prastanto</strong> — desainer grafis dan
-                    animator 2D.
+                    <strong>Halo, saya Darma Prastanto</strong>
                   </p>
                   <p>
-                    Saya memiliki keahli membuat aset vektor, rigging sederhana, serta
-                    animasi. Saya selalu bersemangat mempelajari hal baru dan langsung
-                    menerapkannya dalam proses kerja.
+                    Fokus utama saya adalah di bidang kreatif, 
+                    mulai dari merancang identitas visual yang matang 
+                    hingga menyusun antarmuka digital (UI/UX) yang ramah pengguna. 
+                    Dalam proses kerja, saya memadukan kemampuan desain visual 
+                    dengan teknologi AI modern untuk membantu merealisasikan 
+                    konsep desain tersebut menjadi purwarupa produk digital yang fungsional.
                   </p>
 
                   <div className="pt-2">
@@ -268,6 +270,9 @@ export default function AboutSection({
                         <strong>Figma</strong> — platform desain &amp; prototipe berbasis
                         web untuk merancang tampilan antarmuka (UI/UX) produk digital
                         seperti website &amp; aplikasi.
+                      </li>
+                      <li>
+                        <strong>Visual Studio Code</strong>
                       </li>
                     </ul>
                   </div>
