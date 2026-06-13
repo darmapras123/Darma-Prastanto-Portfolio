@@ -18,17 +18,17 @@ export default function ContactSection({
     <section
       id="contact"
       className={[
-        "relative flex items-center justify-center px-6 overflow-x-hidden",
-        // mempertahankan ruang tinggi asli bawaan Anda
-        "min-h-[108vh] sm:min-h-[130vh] lg:min-h-[145vh] xl:min-h-[160vh]",
-        "pb-[14rem] sm:pb-[22rem] lg:pb-[26rem] xl:pb-[30rem]",
+        "relative flex flex-col sm:flex-row items-center justify-center px-6 overflow-x-hidden",
+        // Menyesuaikan tinggi ruang: h-auto di HP agar fleksibel, min-h asli Anda di Laptop
+        "h-auto sm:min-h-[130vh] lg:min-h-[145vh] xl:min-h-[160vh]",
+        "pt-12 pb-8 sm:pb-[22rem] lg:pb-[26rem] xl:pb-[30rem]",
         isLightMode
           ? "bg-gradient-to-br from-white via-gray-100 to-gray-200 text-black"
           : "contact-dark text-white",
       ].join(" ")}
     >
-      {/* ===== Konten utama: Diperlebar ke max-w-5xl agar grid kiri-kanan lega ===== */}
-      <div className="w-full max-w-5xl text-center z-[3]">
+      {/* ===== Konten utama: Grid Atas (Form & Sosmed) ===== */}
+      <div className="w-full max-w-5xl text-center z-[3] mb-4 sm:mb-0">
         <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6 leading-tight tracking-tight">
           <span className="font-extrabold text-transparent bg-clip-text bg-[linear-gradient(90deg,#19D7FF_0%,#24D8C0_50%,#2BD985_100%)]">
             GET IN
@@ -36,15 +36,12 @@ export default function ContactSection({
           TOUCH
         </h2>
 
-        <p className="mb-12 max-w-2xl mx-auto opacity-90">
+        <p className="mb-8 max-w-2xl mx-auto opacity-90 text-sm sm:text-base">
           Jika ingin terhubung dengan saya, silakan gunakan tautan sosial di bawah
           ini. Atau bekerja sama jangan ragu untuk menghubungi saya melalui informasi kontak di bawah ini.
         </p>
 
-        {/* Sistem Layout Grid Pendukung: 
-          - Layar HP: Otomatis menumpuk satu kolom vertikal (atas-bawah)
-          - Layar Komputer/Laptop (lg): Berdampingan seimbang (kiri & kanan)
-        */}
+        {/* Sistem Layout Grid Pendukung */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start w-full mt-4">
           
           {/* SISI KIRI: Kotak Terhubung Dengan Saya (SosmedBox) */}
@@ -60,12 +57,17 @@ export default function ContactSection({
         </div>
       </div>
 
-      {/* ===== PNG PORTO (PERBAIKAN: Posisi responsif top-[82%] di HP agar tidak menabrak footer) ===== */}
+      {/* ===== PNG PORTO (PERBAIKAN: Mengatur my-2 di HP agar jarak dengan tombol di atasnya pas & ideal) ===== */}
       <figure
         className="
           pointer-events-none select-none
-          absolute left-[48%] top-[82%] sm:top-[75%] -translate-x-1/2 -translate-y-1/2
-          z-[1]
+          relative sm:absolute 
+          left-0 sm:left-[48%] 
+          top-0 sm:top-[75%] 
+          transform-none sm:-translate-x-1/2 sm:-translate-y-1/2
+          mx-auto flex justify-center
+          z-[1] w-full
+          my-2 sm:my-0
         "
         aria-hidden
       >
@@ -85,18 +87,15 @@ export default function ContactSection({
         />
       </figure>
 
-      {/* ===== Footer / Watermark (PERBAIKAN: Ditambahkan z-[2] dan padding pengaman agar tidak tertutup gambar) ===== */}
+      {/* ===== Footer / Watermark (PERBAIKAN: Mengatur mt-6 di HP agar jarak dari gambar ke teks pas & seimbang) ===== */}
       <footer
         className={[
-          "absolute inset-x-0 bottom-0 sm:bottom-10 text-center text-xs sm:text-sm select-none z-[2]",
-          "pb-4 pt-10 sm:pb-0 sm:pt-0", // memberi ruang padding di HP
-          // memberikan gradasi shadow tipis di HP agar teks kontras dan super jelas jika dilewati ujung gambar
-          isLightMode 
-            ? "text-black bg-gradient-to-t from-white/90 via-white/40 to-transparent sm:bg-none" 
-            : "text-white bg-gradient-to-t from-[#151515]/90 via-[#151515]/30 to-transparent sm:bg-none",
+          "relative sm:absolute inset-x-0 bottom-0 sm:bottom-10 text-center text-xs sm:text-sm select-none z-[2]",
+          "w-full mt-6 sm:mt-0 px-4",
+          isLightMode ? "text-black" : "text-white",
         ].join(" ")}
       >
-        <div className="px-4">
+        <div>
           <div className="font-medium">© 2025 Darma Prastanto. All rights reserved.</div>
           <div className="mt-1 opacity-80">
             Built with — using React, TypeScript, Tailwind CSS, and Framer Motion.

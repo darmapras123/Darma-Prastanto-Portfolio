@@ -44,7 +44,7 @@ export default function CertificatesBox({
         className="pointer-events-none absolute -top-1/2 left-[-55%] h-[220%] w-[46%] shimmer-diag shimmer-run"
       />
       <span className="font-medium">
-        <span className="opacity-90">Certificates: 3</span>
+        <span className="opacity-90">Certificates: 5</span>
       </span>
 
       <style jsx>{`

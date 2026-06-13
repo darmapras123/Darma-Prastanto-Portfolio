@@ -44,7 +44,7 @@ export default function ProjectsBox({
         className="pointer-events-none absolute -top-1/2 left-[-55%] h-[220%] w-[46%] shimmer-diag shimmer-run"
       />
       <span className="font-medium">
-        <span className="opacity-90">Project: 5</span>
+        <span className="opacity-90">Project: 6</span>
       </span>
 
       <style jsx>{`
