@@ -11,7 +11,7 @@ type Props = {
 };
 
 export default function ProjectKlikBapas({ 
-  siteUrl = "https://klikbapas.com",
+  siteUrl = "https://bapasmagelang.com/",
   isLightMode, // status tema dioper di sini
   onViewerOpenChange
 }: Props) {
